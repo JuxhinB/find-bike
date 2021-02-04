@@ -1,0 +1,1 @@
+{"version":3,"file":"BaseRouter.js","sourceRoot":"","sources":["../../src/routes/BaseRouter.ts"],"names":[],"mappings":";;;AAAA,qCAAiC;AAEjC,gDAAgD;AAEzC,MAAM,UAAU,GAAG,GAAW,EAAE;IACnC,MAAM,MAAM,GAAG,gBAAM,EAAE,CAAC;IAExB,MAAM,CAAC,GAAG,CAAC,QAAQ,EAAE,4BAAc,CAAC,UAAU,CAAC,CAAC;IAChD,oDAAoD;IAEpD,OAAO,MAAM,CAAC;AAClB,CAAC,CAAA;AAPY,QAAA,UAAU,cAOtB"}
