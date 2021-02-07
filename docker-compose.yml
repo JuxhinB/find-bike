@@ -3,10 +3,8 @@ version: "3"
 services:
   api-server:
     image: docker.io/juxhinbleta/find-bike:1.0.0
-    environment:
-      - 
     ports:
-      - 4000:4000
+      - 7777:7777
     depends_on:
       - mongo
     networks:
@@ -14,8 +12,6 @@ services:
 
   mongo:
     image: mongo:3.6.21-xenial
-    environment:
-      - 
     ports:
       - 27017:27017
     networks:
