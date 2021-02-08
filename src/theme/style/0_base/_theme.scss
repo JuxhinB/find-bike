@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Serif|Roboto|Russo+One&display=swap");
+
+.outer-container {
+  max-width: $outer-container;
+  margin: 0 auto;
+
+  @include flex($justify: center);
+}
+
+.inner-container {
+  max-width: $inner-container;
+}

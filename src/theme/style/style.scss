@@ -1,0 +1,13 @@
+/**
+ * IMPORTANT: This file is the un-optimized version of the style.
+ * Using postcss-cli this file generates style.scss which has only the used style of the project.
+ *
+ * Main file of style which includes most of the important things of the style.
+ * Not all file are necessary to be included here but for other upcoming and included
+ * files this one is a dependency.
+ */
+.app {
+  @import "./0_base/_main_base";
+  @import "./1_component/_main_component";
+  @import "./2_container/_main_container";
+}

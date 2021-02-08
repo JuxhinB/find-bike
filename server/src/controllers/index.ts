@@ -1,3 +1,3 @@
-export { RequestHandler } from 'express-serve-static-core';
+export { RequestHandler } from "express-serve-static-core";
 
-export { BaseController } from './BaseController';
+export { BaseController } from "./BaseController";

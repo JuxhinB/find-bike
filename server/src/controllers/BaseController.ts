@@ -1,4 +1,4 @@
-import { RequestHandler } from '.';
+import { RequestHandler } from ".";
 
 export const BaseController = {
   helloWorld: (request, response, next) => {
@@ -7,5 +7,5 @@ export const BaseController = {
     });
   },
 } as {
-  helloWorld: RequestHandler<{ name: string }, {}, { name: string }>,
+  helloWorld: RequestHandler<{ name: string }, {}, { name: string }>;
 };

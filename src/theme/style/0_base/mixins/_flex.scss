@@ -1,0 +1,24 @@
+//
+// flex mixin in order to manage a box inner content
+// this mixin returns as default only the flex property
+// other flex properties are conditionals
+//
+
+@mixin flex($f-dir: unset, $justify: unset, $align: unset, $wrap: unset) {
+  // default return
+  display: flex;
+
+  // conditional returns
+  @if $f-dir != "unset" {
+    flex-direction: $f-dir;
+  }
+  @if $justify != "unset" {
+    justify-content: $justify;
+  }
+  @if $align != "unset" {
+    align-items: $align;
+  }
+  @if $wrap != "unset" {
+    flex-wrap: $wrap;
+  }
+}

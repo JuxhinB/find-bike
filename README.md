@@ -8,6 +8,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Available Front-End Commands
 
+#### `client:build-start`
+
+Builds the styles only.
+
 #### `client:start`
 
 Runs the app in the development mode.\
@@ -41,6 +45,10 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+#### `client:format`
+
+Formats the src (front-end) directory only.
+
 ### Available Back-End Commands
 
 #### `server:tsc`
@@ -62,6 +70,10 @@ Runs the server in Watch mode.
 #### `server:dev`
 
 Runs concurrently transpilation and server in Watch mode.
+
+#### `server:format`
+
+Formats the server (back-end) directory only.
 
 #### `build:prod`
 
