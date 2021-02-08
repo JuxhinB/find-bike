@@ -11,7 +11,7 @@
     "server:tsc-watch": "(cd server && tsc -w)",
     "server:deploy": "(cd server && node index.js)",
     "server:watch-deploy": "(cd server && nodemon index.js)",
-    "server:dev": "(cd server && concurrently \"npm run server:tsc-watch\" \"npm run server:watch-deploy\")",
+    "server:dev": "export NODE_ENV=development && (cd server && concurrently \"npm run server:tsc-watch\" \"npm run server:watch-deploy\")",
     "build:prod": "npm run client:build && npm run server:tsc && npm run server:deploy"
   },
   "dependencies": {

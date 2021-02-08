@@ -1,6 +1,7 @@
 import { connect } from "mongoose";
 
-let mongoURI = `mongodb://localhost:27017/find-bike-db`;
+let mongoURI = process.env.NODE_ENV === "development" ? `mongodb://localhost:27017/find-bike-db` : `mongodb://mongo:27017/find-bike-db`;
+
 const connectDB = async () => {
   try {
     await connect(mongoURI, {
