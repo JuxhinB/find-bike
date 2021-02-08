@@ -1,12 +1,12 @@
-import path from 'path';
 import express from "express";
+import db from "./config/db";
 
-import { BaseRouter } from './routes';
+import { BaseRouter } from "./routes";
 
 const app = express();
 
-app.use('/', BaseRouter());
+db();
 
-export {
-  app,
-};
+app.use("/", BaseRouter());
+
+export { app };

@@ -3,6 +3,7 @@ version: "3"
 services:
   api-server:
     image: docker.io/juxhinbleta/find-bike:1.0.0
+    container_name: find-bike-app
     ports:
       - 7777:7777
     depends_on:
@@ -12,12 +13,13 @@ services:
 
   mongo:
     image: mongo:3.6.21-xenial
+    container_name: find-bike-db
     ports:
       - 27017:27017
     networks:
       - find-bike
     volumes:
-      - mongo-data:data/db
+      - data/db
 
 networks:
   find-bike:
