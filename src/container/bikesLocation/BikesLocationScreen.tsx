@@ -1,7 +1,7 @@
 import React from "react";
 import { GeneralLayout } from "../../layouts";
 
-function RegisterScreen() {
+function BikesLocationScreen() {
   return (
     <GeneralLayout>
       <div className={""}></div>
@@ -9,4 +9,4 @@ function RegisterScreen() {
   );
 }
 
-export default RegisterScreen;
+export default BikesLocationScreen;

@@ -1,0 +1,12 @@
+{
+  "PAGES": {},
+  "STRINGS": {},
+  "LABELS": {},
+  "ACTIONS": {
+    "go_home": "Go Home"
+  },
+  "MESSAGES": {
+    "something_went_wrong": "Something went wrong!"
+  },
+  "ERRORS": {}
+}

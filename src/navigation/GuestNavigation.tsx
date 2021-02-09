@@ -1,14 +1,12 @@
-import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { RegisterScreen } from "../container/register";
-
-interface GuestNavigationProps {}
+import container from "../container";
 
 function GuestNavigation() {
   return (
     <Switch>
-      <Route exact path="/" component={RegisterScreen} />
-      <Route exact path="/register" component={RegisterScreen} />
+      <Route exact path="/" component={container.BikesLocationScreen} />
+      <Route exact path="/home" component={container.BikesLocationScreen} />
+      <Route component={container.NotFoundScreen} />
     </Switch>
   );
 }

@@ -6,6 +6,20 @@
  * Not all file are necessary to be included here but for other upcoming and included
  * files this one is a dependency.
  */
+
+body {
+  font-family: Roboto !important;
+}
+
+.app {
+  min-width: 100vw;
+  min-height: 100vh;
+
+  &.hidden {
+    display: none;
+  }
+}
+
 @import "./0_base/_main_base";
 @import "./1_component/_main_component";
 @import "./2_container/_main_container";

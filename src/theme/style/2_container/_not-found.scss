@@ -1,0 +1,35 @@
+.not-found-screen {
+  background-color: #ffffff;
+  background-image: url("../../../assets/svg/topography.svg");
+
+  .outer-container {
+    min-height: 100vh;
+  }
+
+  .inner-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.not-found {
+  &-error {
+    font-weight: bold;
+    color: #119023;
+  }
+
+  &-message {
+    color: darkolivegreen;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+
+  &-illustration {
+    max-width: 300px;
+    margin-bottom: 20px;
+  }
+}
