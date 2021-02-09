@@ -1,0 +1,15 @@
+.bikes-location-screen {
+  .outer-container {
+    min-height: 100vh;
+  }
+
+  .inner-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+  }
+
+  .leaflet-container {
+    flex: 1;
+  }
+}
