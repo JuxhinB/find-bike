@@ -5,9 +5,9 @@ import { BikeController } from "../controllers";
 export const BikeRouter = (): Router => {
   const router = Router();
 
-  router.get("/getBikeList", BikeController.getBikeList);
-  router.post("/rentBike", BikeController.rentBike);
-  router.post("/returnBike", BikeController.returnBike);
+  router.get("/list", BikeController.list);
+  router.post("/rent", BikeController.rent);
+  router.post("/return", BikeController.return);
 
   return router;
 };

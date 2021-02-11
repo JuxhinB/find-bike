@@ -2,11 +2,11 @@ import { Router } from "express";
 
 import { UserController } from "../controllers";
 
-export const BikeRouter = (): Router => {
+export const UserRouter = (): Router => {
   const router = Router();
 
-  router.get("/getUser", UserController.getUser);
-  router.post("/setUser", UserController.setUser);
+  router.get("/get", UserController.get);
+  router.post("/set", UserController.set);
 
   return router;
 };

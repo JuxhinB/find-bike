@@ -1,12 +1,21 @@
-import { Bike } from "./BikeModel";
-import { User } from "./UserModel";
+import mongoose from "mongoose";
 
 export interface UserHistory {
-  actionsList: UserActions[]
+  actionsList: UserActions[];
 }
 
-interface UserActions {
+export interface UserActions {
   created_at: Date;
-  bike: Bike;
-  user: User;
+  bikeId: String;
+  userId: String;
+  action: "RENT" | "RETURN";
 }
+
+const UserActions = new mongoose.Schema<mongoose.Document<UserActions>>({
+  created_at: Date,
+  bikeId: String,
+  userId: String,
+  action: String,
+});
+
+export default mongoose.model("UserActions", UserActions);

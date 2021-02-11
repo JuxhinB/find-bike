@@ -7,7 +7,7 @@ const app = express();
 const PORT = 7777;
 
 app.use("/", express.static("../build"));
-app.use("/api", source.app);
+app.use("/api/v1", source.app);
 
 app.listen(PORT, function () {
   console.log(`Server listening on port ${PORT}...`);
