@@ -1,9 +1,15 @@
 {
   "PAGES": {},
   "STRINGS": {},
-  "LABELS": {},
+  "LABELS": {
+    "available": "Available",
+    "rented": "Rented",
+    "out_of_service": "Out of service"
+  },
   "ACTIONS": {
-    "go_home": "Go Home"
+    "go_home": "Go Home",
+    "rent": "Rent",
+    "return": "Return"
   },
   "MESSAGES": {
     "something_went_wrong": "Something went wrong!"

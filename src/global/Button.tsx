@@ -6,6 +6,7 @@ interface ButtonProps {
   loading?: boolean;
   disabled?: boolean;
   htmlType?: "button" | "submit";
+  extraClass?: string;
 }
 
 function Button({
@@ -14,12 +15,13 @@ function Button({
   loading = false,
   disabled = false,
   htmlType = "button",
+  extraClass = "",
 }: ButtonProps): JSX.Element {
   return (
     <button
       type={htmlType}
       onClick={onClick}
-      className={`btn`}
+      className={`btn ${extraClass}`}
       disabled={loading || disabled}
     >
       {loading && (

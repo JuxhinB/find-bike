@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { GeneralLayout } from "../../layouts";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { divIcon, LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { UserContext } from "../../provider/UserProvider";
+import onMapMarker from "../../assets/svg/on-find-bike-marker.svg";
+import offMapMarker from "../../assets/svg/off-find-bike-marker.svg";
+import global from "../../global";
+import _string from "../../config/localization/_string";
 
 const initialPosition: LatLngLiteral = { lat: 41.3200327, lng: 19.8200031 };
 
 function BikesLocationScreen() {
-  const [clickedMarkerLocation, setClickedMarkerLocation] = useState<any>(null);
+  const { bikeList, rentBike, returnBike } = useContext(UserContext);
 
   useEffect(() => {
     window.dispatchEvent(new Event("resize"));
@@ -22,15 +27,14 @@ function BikesLocationScreen() {
       <MapContainer
         className="flex-grow"
         center={initialPosition}
-        zoom={15}
+        zoom={11}
         scrollWheelZoom={false}
       >
-        <MyComponent setClickedMarkerLocation={setClickedMarkerLocation} />
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {clickedMarkerLocation && (
+        {/* {clickedMarkerLocation && (
           <Marker
             position={clickedMarkerLocation}
             icon={divIcon({
@@ -39,30 +43,56 @@ function BikesLocationScreen() {
             `,
             })}
           />
-        )}
+        )} */}
+        {bikeList &&
+          bikeList.map((bike, index) => (
+            <Marker
+              key={index}
+              position={{ lat: bike.lat, lng: bike.lng }}
+              icon={divIcon({
+                html:
+                  bike.status === "AVAILABLE"
+                    ? `<img src=${onMapMarker} class="leaflet-marker-img" />`
+                    : `<img src=${offMapMarker} class="leaflet-marker-img" />`,
+              })}
+            >
+              <Popup>
+                <span
+                  style={{
+                    marginBottom: "10px",
+                    fontSize: "1rem",
+                    color: bike.status === "AVAILABLE" ? "green" : "red",
+                  }}
+                >
+                  {bike.status === "AVAILABLE" && _string.LABELS.available}
+                  {bike.status === "RENTED" && _string.LABELS.rented}
+                  {bike.status === "OUT-OF-USE" &&
+                    _string.LABELS.out_of_service}
+                </span>
+                {bike.status === "AVAILABLE" ? (
+                  <global.Button
+                    onClick={() => {
+                      rentBike(bike._id);
+                    }}
+                  >
+                    {_string.ACTIONS.rent}
+                  </global.Button>
+                ) : (
+                  <global.Button
+                    extraClass="btn-danger"
+                    onClick={() => {
+                      returnBike(bike._id);
+                    }}
+                  >
+                    {_string.ACTIONS.return}
+                  </global.Button>
+                )}
+              </Popup>
+            </Marker>
+          ))}
       </MapContainer>
     </GeneralLayout>
   );
 }
 
 export default BikesLocationScreen;
-
-function MyComponent({ setClickedMarkerLocation }: any) {
-  const map = useMapEvents({
-    drag: () => {
-      // console.log(map.getCenter())
-      console.log(map.getCenter().lat, map.getCenter().lng);
-    },
-    click: (e) => {
-      setClickedMarkerLocation({
-        lat: e.latlng.lat,
-        lng: e.latlng.lng,
-      });
-      console.log(map.getBounds().getNorth(), map.getBounds().getEast());
-    },
-    locationfound: (location) => {
-      console.log("location found:", location);
-    },
-  });
-  return null;
-}

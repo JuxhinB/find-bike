@@ -10,4 +10,12 @@
   &:hover {
     background-color: #0d721c;
   }
+
+  &-danger {
+    background-color: #901111;
+
+    &:hover {
+      background-color: #720d0d;
+    }
+  }
 }
