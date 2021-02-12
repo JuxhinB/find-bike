@@ -1,6 +1,9 @@
 {
   "PAGES": {},
-  "STRINGS": {},
+  "STRINGS": {
+    "find": "Find",
+    "bike": "Bike"
+  },
   "LABELS": {
     "available": "Available",
     "rented": "Rented",
@@ -9,7 +12,9 @@
   "ACTIONS": {
     "go_home": "Go Home",
     "rent": "Rent",
-    "return": "Return"
+    "return": "Return",
+    "login": "Login",
+    "register": "Register"
   },
   "MESSAGES": {
     "something_went_wrong": "Something went wrong!"

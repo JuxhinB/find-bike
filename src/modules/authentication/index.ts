@@ -1,7 +1,7 @@
-import RegisterForm from "./RegisterForm"
-import LoginForm from "./LoginForm"
+import RegisterForm from "./RegisterForm";
+import LoginForm from "./LoginForm";
 
 export default {
   RegisterForm,
   LoginForm,
-}
+};
