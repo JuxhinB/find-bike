@@ -2,7 +2,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { fetchApi } from "../config/core/Api";
 import Storage from "../config/core/Storage";
-import { BikeType, UserInfoType } from "../Types";
+import { BikeType, UserInfoType, UserActionsType } from "../Types";
 import { notification } from "antd";
 import { NotificationPlacement } from "antd/lib/notification";
 import "antd/dist/antd.css";
@@ -13,6 +13,7 @@ interface UserProviderProps {
 }
 interface IUserContextTypes {
   bikeList: BikeType[];
+  actionList: UserActionsType[];
   rentBike: (id: string) => void;
   returnBike: (id: string) => void;
   userInfo: UserInfoType | null;
@@ -30,6 +31,7 @@ interface IUserContextTypes {
 
 const USER_CONTEXT_INITIAL_VALUES = {
   bikeList: [],
+  actionList: [],
   rentBike: (id: string) => undefined,
   returnBike: (id: string) => undefined,
   userInfo: null,
@@ -52,11 +54,24 @@ export const UserContext = createContext<IUserContextTypes>({
 function UserProvider({ children }: UserProviderProps) {
   const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
   const [bikeList, setBikeList] = useState<BikeType[]>([]);
+  const [actionList, setActionList] = useState<UserActionsType[]>([]);
 
   const logout = useCallback(() => {
     setUserInfo(null);
     notify(_string.LABELS.success, _string.MESSAGES.logout_success, "success");
     Storage.removeItem("user_id");
+  }, []);
+
+  const addBikes = useCallback((newBike) => {
+    fetchApi({
+      url: "/bike/add",
+      method: "POST",
+      data: {
+        ...newBike,
+      },
+    })
+      .then((r: AxiosResponse<BikeType[]>) => {})
+      .catch((e: AxiosError) => {});
   }, []);
 
   const getBikes = useCallback(() => {
@@ -66,11 +81,43 @@ function UserProvider({ children }: UserProviderProps) {
     })
       .then((r: AxiosResponse<BikeType[]>) => {
         if (r.status === 200) {
-          setBikeList(r.data);
+          if (!r.data.length) {
+            // Mock some bikes
+            mockBikes.forEach((mock) => {
+              addBikes(mock);
+              setTimeout(() => {
+                // eslint-disable-next-line no-restricted-globals
+                location.reload();
+              }, 3000);
+            });
+            notify(
+              _string.LABELS.success,
+              _string.MESSAGES.mock_bikes_created,
+              "success"
+            );
+          } else {
+            setBikeList(r.data);
+          }
         }
       })
       .catch((e: AxiosError) => {});
-  }, []);
+  }, [addBikes]);
+
+  const getUserActions = useCallback(() => {
+    fetchApi({
+      url: "/user-actions/list",
+      method: "POST",
+      data: {
+        id: userInfo?.id,
+      },
+    })
+      .then((r: AxiosResponse<UserActionsType[]>) => {
+        if (r.status === 200) {
+          setActionList(r.data);
+        }
+      })
+      .catch((e: AxiosError) => {});
+  }, [userInfo]);
 
   const getUser = useCallback(
     (id: string) => {
@@ -111,17 +158,25 @@ function UserProvider({ children }: UserProviderProps) {
     }
   }, [getUser]);
 
+  useEffect(() => {
+    if (userInfo) {
+      getUserActions();
+    }
+  }, [userInfo, getUserActions]);
+
   function rentBike(id: string): void {
     fetchApi({
       url: "/bike/rent",
       method: "POST",
       data: {
-        id: id,
+        bike_id: id,
+        user_id: userInfo?.id,
       },
     })
       .then((r: AxiosResponse<BikeType[]>) => {
         if (r.status === 200) {
           getBikes();
+          getUserActions();
         }
       })
       .catch((e: AxiosError) => {});
@@ -132,12 +187,14 @@ function UserProvider({ children }: UserProviderProps) {
       url: "/bike/return",
       method: "POST",
       data: {
-        id: id,
+        bike_id: id,
+        user_id: userInfo?.id,
       },
     })
       .then((r: AxiosResponse<BikeType[]>) => {
         if (r.status === 200) {
           getBikes();
+          getUserActions();
         }
       })
       .catch((e: AxiosError) => {});
@@ -225,6 +282,7 @@ function UserProvider({ children }: UserProviderProps) {
 
   const providerValue = {
     bikeList,
+    actionList,
     rentBike,
     returnBike,
     userInfo,
@@ -242,3 +300,12 @@ function UserProvider({ children }: UserProviderProps) {
 }
 
 export default UserProvider;
+
+let mockBikes = [
+  { lat: 41.3270327, lng: 19.8290031 },
+  { lat: 41.3260327, lng: 19.8290031 },
+  { lat: 41.3250327, lng: 19.8280031 },
+  { lat: 41.3230327, lng: 19.8260031 },
+  { lat: 41.3230327, lng: 19.8210031 },
+  { lat: 41.3210327, lng: 19.8170031 },
+];

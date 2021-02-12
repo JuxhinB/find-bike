@@ -21,6 +21,7 @@
     "return": "Return",
     "login": "Login",
     "logout": "Logout",
+    "actions_history": "Actions History",
     "register": "Register"
   },
   "MESSAGES": {
@@ -29,6 +30,7 @@
     "min_length_input": "Field should be more than",
     "login_success": "Login Success",
     "register_success": "Register Success",
+    "mock_bikes_created": "Mock bikes added successfully. Reloading page...",
     "logout_success": "Logout Success"
   },
   "ERRORS": {}

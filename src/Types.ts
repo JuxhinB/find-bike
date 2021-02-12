@@ -14,3 +14,11 @@ export interface UserInfoType {
   name: string;
   password: string;
 }
+
+export interface UserActionsType {
+  _id: string;
+  created_at: string;
+  bikeId: String;
+  userId: String;
+  action: "RENT" | "RETURN";
+}

@@ -14,12 +14,7 @@ if (initialLoader) {
     initialLoader.classList.add("hidden");
     setTimeout(() => {
       root.classList.remove("hidden");
-      ReactDOM.render(
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>,
-        root
-      );
+      ReactDOM.render(<App />, root);
       initialLoader.remove();
     }, 1000);
   });

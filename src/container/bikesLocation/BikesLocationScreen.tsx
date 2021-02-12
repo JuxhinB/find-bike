@@ -10,10 +10,10 @@ import _string from "../../config/localization/_string";
 import modules from "../../modules";
 import { Button } from "antd";
 
-const initialPosition: LatLngLiteral = { lat: 41.3200327, lng: 19.8200031 };
+const initialPosition: LatLngLiteral = { lat: 41.3250327, lng: 19.8200031 };
 
 function BikesLocationScreen() {
-  const { bikeList, rentBike, returnBike } = useContext(UserContext);
+  const { bikeList, rentBike, returnBike, userInfo } = useContext(UserContext);
 
   useEffect(() => {
     window.dispatchEvent(new Event("resize"));
@@ -30,7 +30,7 @@ function BikesLocationScreen() {
         <MapContainer
           className="flex-grow"
           center={initialPosition}
-          zoom={10}
+          zoom={15}
           scrollWheelZoom={false}
         >
           <TileLayer
@@ -64,6 +64,7 @@ function BikesLocationScreen() {
                   </span>
                   {bike.status === "AVAILABLE" ? (
                     <Button
+                      disabled={!userInfo}
                       type="primary"
                       onClick={() => {
                         rentBike(bike._id);
@@ -73,6 +74,7 @@ function BikesLocationScreen() {
                     </Button>
                   ) : (
                     <Button
+                      disabled={!userInfo}
                       type="ghost"
                       danger={true}
                       onClick={() => {
