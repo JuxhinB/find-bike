@@ -2,8 +2,12 @@ import { AxiosError, AxiosResponse } from "axios";
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { fetchApi } from "../config/core/Api";
 import { BikeType, UserInfoType } from "../Types";
-require("antd/lib/notification/style/css");
-require("antd/lib/button/style/css");
+import "antd/dist/antd.css";
+// import "antd/lib/notification/style/css";
+// import "antd/lib/button/style/css";
+// import "antd/lib/form/style/css";
+// import "antd/lib/input/style/css";
+// import "antd/lib/modal/style/css";
 
 interface UserProviderProps {
   children: JSX.Element;

@@ -7,7 +7,11 @@
   "LABELS": {
     "available": "Available",
     "rented": "Rented",
-    "out_of_service": "Out of service"
+    "out_of_service": "Out of service",
+    "login": "Login",
+    "register": "Register",
+    "name": "Name",
+    "password": "Password"
   },
   "ACTIONS": {
     "go_home": "Go Home",
@@ -17,7 +21,9 @@
     "register": "Register"
   },
   "MESSAGES": {
-    "something_went_wrong": "Something went wrong!"
+    "something_went_wrong": "Something went wrong!",
+    "required_field": "Required Field",
+    "min_length_input": "Field should be more than"
   },
   "ERRORS": {}
 }
