@@ -20,6 +20,7 @@
     "rent": "Rent",
     "return": "Return",
     "login": "Login",
+    "logout": "Logout",
     "register": "Register"
   },
   "MESSAGES": {
@@ -27,6 +28,7 @@
     "required_field": "Required Field",
     "min_length_input": "Field should be more than",
     "login_success": "Login Success",
+    "register_success": "Register Success",
     "logout_success": "Logout Success"
   },
   "ERRORS": {}

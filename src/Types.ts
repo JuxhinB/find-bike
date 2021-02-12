@@ -10,6 +10,7 @@ export interface BikeType {
 
 export interface UserInfoType {
   _id: string;
+  id: string;
   name: string;
   password: string;
 }

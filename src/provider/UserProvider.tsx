@@ -1,16 +1,12 @@
 import { AxiosError, AxiosResponse } from "axios";
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { fetchApi } from "../config/core/Api";
+import Storage from "../config/core/Storage";
 import { BikeType, UserInfoType } from "../Types";
 import { notification } from "antd";
 import { NotificationPlacement } from "antd/lib/notification";
 import "antd/dist/antd.css";
 import _string from "../config/localization/_string";
-// import "antd/lib/notification/style/css";
-// import "antd/lib/button/style/css";
-// import "antd/lib/form/style/css";
-// import "antd/lib/input/style/css";
-// import "antd/lib/modal/style/css";
 
 interface UserProviderProps {
   children: JSX.Element;
@@ -57,6 +53,12 @@ function UserProvider({ children }: UserProviderProps) {
   const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
   const [bikeList, setBikeList] = useState<BikeType[]>([]);
 
+  const logout = useCallback(() => {
+    setUserInfo(null);
+    notify(_string.LABELS.success, _string.MESSAGES.logout_success, "success");
+    Storage.removeItem("user_id");
+  }, []);
+
   const getBikes = useCallback(() => {
     fetchApi({
       url: "/bike/list",
@@ -70,9 +72,44 @@ function UserProvider({ children }: UserProviderProps) {
       .catch((e: AxiosError) => {});
   }, []);
 
+  const getUser = useCallback(
+    (id: string) => {
+      fetchApi({
+        url: "/user/get",
+        method: "POST",
+        data: {
+          id: id,
+        },
+      })
+        .then((r: AxiosResponse<UserInfoType>) => {
+          if (r.status === 200 && r.data) {
+            setUserInfo(r.data);
+          } else {
+            logout();
+          }
+        })
+        .catch((error: AxiosError) => {
+          console.log(error);
+          notify(
+            _string.LABELS.error,
+            _string.MESSAGES.something_went_wrong,
+            "error"
+          );
+        });
+    },
+    [logout]
+  );
+
   useEffect(() => {
     getBikes();
   }, [getBikes]);
+
+  useEffect(() => {
+    let id = Storage.getItem("user_id");
+    if (id) {
+      getUser(id);
+    }
+  }, [getUser]);
 
   function rentBike(id: string): void {
     fetchApi({
@@ -115,9 +152,15 @@ function UserProvider({ children }: UserProviderProps) {
         password: password,
       },
     })
-      .then((r: AxiosResponse<UserInfoType[]>) => {
-        if (r.status === 200 && r.data.length) {
-          setUserInfo(r.data[0]);
+      .then((r: AxiosResponse<UserInfoType>) => {
+        if (r.status === 200 && r.data) {
+          setUserInfo(r.data);
+          Storage.setItem("user_id", r.data.id);
+          notify(
+            _string.LABELS.success,
+            _string.MESSAGES.register_success,
+            "success"
+          );
         }
       })
       .catch((error: AxiosError) => {
@@ -126,26 +169,6 @@ function UserProvider({ children }: UserProviderProps) {
       })
       .finally(() => {
         callback();
-      });
-  }
-
-  function getUser(id: string) {
-    fetchApi({
-      url: "/user/get",
-      method: "POST",
-    })
-      .then((r: AxiosResponse<UserInfoType[]>) => {
-        if (r.status === 200 && r.data.length) {
-          setUserInfo(r.data[0]);
-        }
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-        notify(
-          _string.LABELS.error,
-          _string.MESSAGES.something_went_wrong,
-          "error"
-        );
       });
   }
 
@@ -158,32 +181,29 @@ function UserProvider({ children }: UserProviderProps) {
         password: password,
       },
     })
-      .then((r: AxiosResponse<UserInfoType[]>) => {
-        if (r.status === 200 && r.data.length) {
-          setUserInfo(r.data[0]);
+      .then((r: AxiosResponse<UserInfoType>) => {
+        if (r.status === 200 && r.data) {
+          setUserInfo(r.data);
+          Storage.setItem("user_id", r.data.id);
           notify(
             _string.LABELS.success,
             _string.MESSAGES.login_success,
-            "error"
+            "success"
           );
         }
       })
       .catch((error: AxiosError) => {
-        console.log(error);
         notify(
           _string.LABELS.error,
-          _string.MESSAGES.something_went_wrong,
+          error.response
+            ? error.response.data
+            : _string.MESSAGES.something_went_wrong,
           "error"
         );
       })
       .finally(() => {
         callback();
       });
-  }
-
-  function logout() {
-    setUserInfo(null);
-    notify(_string.LABELS.success, _string.MESSAGES.logout_success, "error");
   }
 
   function notify(
