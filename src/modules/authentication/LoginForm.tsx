@@ -1,6 +1,7 @@
-import React, { Dispatch } from "react";
+import React, { Dispatch, useContext } from "react";
 import { Form, Input, Button } from "antd";
 import _string from "../../config/localization/_string";
+import { UserContext } from "../../provider/UserProvider";
 
 interface Props {
   setIsAuthModalVisible?: Dispatch<boolean>;
@@ -8,7 +9,11 @@ interface Props {
 
 function LoginForm({ setIsAuthModalVisible }: Props): JSX.Element {
   const [form] = Form.useForm();
+  const { login } = useContext(UserContext);
   const onFinish = (values: { name: string; password: string }) => {
+    login(values.name, values.password, () => {
+      form.resetFields();
+    });
     if (setIsAuthModalVisible) {
       setIsAuthModalVisible(false);
     }

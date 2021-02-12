@@ -11,7 +11,9 @@
     "login": "Login",
     "register": "Register",
     "name": "Name",
-    "password": "Password"
+    "password": "Password",
+    "error": "Error",
+    "success": "Success"
   },
   "ACTIONS": {
     "go_home": "Go Home",
@@ -23,7 +25,9 @@
   "MESSAGES": {
     "something_went_wrong": "Something went wrong!",
     "required_field": "Required Field",
-    "min_length_input": "Field should be more than"
+    "min_length_input": "Field should be more than",
+    "login_success": "Login Success",
+    "logout_success": "Logout Success"
   },
   "ERRORS": {}
 }
