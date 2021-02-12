@@ -1,6 +1,5 @@
 import { UserModel } from "../models/UserModel";
 import { RequestHandler } from ".";
-import mongoose from "mongoose";
 import { nanoid } from "nanoid";
 
 export const UserController = {

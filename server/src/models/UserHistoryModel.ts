@@ -18,4 +18,4 @@ const UserActions = new mongoose.Schema<mongoose.Document<UserActions>>({
   action: String,
 });
 
-export default mongoose.model("UserActions", UserActions);
+export const UserActionsModel = mongoose.model("UserActions", UserActions);

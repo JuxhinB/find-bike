@@ -2,7 +2,7 @@ import cors from "cors";
 import express from "express";
 import db from "./config/db";
 
-import { BikeRouter, UserRouter } from "./routes";
+import { BikeRouter, UserRouter, UserActionsRouter } from "./routes";
 
 const app = express();
 
@@ -14,5 +14,6 @@ db();
 
 app.use("/bike/", BikeRouter());
 app.use("/user/", UserRouter());
+app.use("/user-actions/", UserActionsRouter());
 
 export { app };
