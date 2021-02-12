@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./theme/style/_main_index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-require("normalize.css");
+import "./theme/style/_main_index.scss";
+import "normalize.css";
 
 let root = document.getElementById("root") as HTMLDivElement;
 let initialLoader = document.getElementById("app-loader") as HTMLDivElement;

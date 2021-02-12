@@ -1,14 +1,32 @@
+import { UserModel } from "../models/UserModel";
 import { RequestHandler } from ".";
-import nanoid from "nanoid";
 
 export const UserController = {
-  get: (request, response, next) => {
-    return response.json({});
+  login: (request, response, next) => {
+    UserModel.find((err, users) => {
+      if (err) response.send(err);
+      return response.json(users);
+    });
   },
-  set: (request, response, next) => {
-    return response.json({});
+  get: (request, response, next) => {
+    UserModel.find((err, users) => {
+      if (err) response.send(err);
+      return response.json(users);
+    });
+  },
+  register: (request, response, next) => {
+    const user = new UserModel({
+      name: request.body.name,
+      password: request.body.password,
+    });
+
+    user.save(function (err) {
+      if (err) response.send(err);
+      response.json(user.toJSON());
+    });
   },
 } as {
-  get: RequestHandler<{ name: string }, {}, { name: string }>;
-  set: RequestHandler<{}, {}, {}>;
+  login: RequestHandler<{}, {}, { name: string, password: string }>;
+  get: RequestHandler<{}, {}, { id: string }>;
+  register: RequestHandler<{}, {}, { name: string, password: string }>;
 };

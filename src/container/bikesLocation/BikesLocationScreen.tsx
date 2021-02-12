@@ -6,8 +6,9 @@ import "leaflet/dist/leaflet.css";
 import { UserContext } from "../../provider/UserProvider";
 import onMapMarker from "../../assets/svg/on-find-bike-marker.svg";
 import offMapMarker from "../../assets/svg/off-find-bike-marker.svg";
-import global from "../../global";
 import _string from "../../config/localization/_string";
+import modules from "../../modules";
+import { Button } from "antd";
 
 const initialPosition: LatLngLiteral = { lat: 41.3200327, lng: 19.8200031 };
 
@@ -24,73 +25,68 @@ function BikesLocationScreen() {
 
   return (
     <GeneralLayout>
-      <MapContainer
-        className="flex-grow"
-        center={initialPosition}
-        zoom={11}
-        scrollWheelZoom={false}
-      >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {/* {clickedMarkerLocation && (
-          <Marker
-            position={clickedMarkerLocation}
-            icon={divIcon({
-              html: `
-              <svg width="18" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.774 2.535A8.598 8.598 0 008.654 0C6.343 0 4.17.9 2.534 2.535A8.598 8.598 0 000 8.655c0 2.31.9 4.484 2.535 6.119l4.598 4.598c.405.405.945.628 1.521.628s1.117-.223 1.522-.628l4.598-4.598a8.597 8.597 0 002.534-6.12c0-2.311-.9-4.485-2.534-6.12zm-6.12 8.044A1.927 1.927 0 016.73 8.654c0-1.06.863-1.924 1.924-1.924s1.925.863 1.925 1.924a1.927 1.927 0 01-1.925 1.925z" fill="#FF4949"/><path d="M14.774 2.535A8.598 8.598 0 008.654 0v6.73c1.061 0 1.925.863 1.925 1.924a1.927 1.927 0 01-1.925 1.925V20c.576 0 1.117-.223 1.522-.628l4.598-4.598a8.597 8.597 0 002.534-6.12c0-2.311-.9-4.485-2.534-6.12z" fill="#F30051"/></svg>
-            `,
-            })}
+      <>
+        <modules.navigation.Navigation />
+        <MapContainer
+          className="flex-grow"
+          center={initialPosition}
+          zoom={11}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-        )} */}
-        {bikeList &&
-          bikeList.map((bike, index) => (
-            <Marker
-              key={index}
-              position={{ lat: bike.lat, lng: bike.lng }}
-              icon={divIcon({
-                html:
-                  bike.status === "AVAILABLE"
-                    ? `<img src=${onMapMarker} class="leaflet-marker-img" />`
-                    : `<img src=${offMapMarker} class="leaflet-marker-img" />`,
-              })}
-            >
-              <Popup>
-                <span
-                  style={{
-                    marginBottom: "10px",
-                    fontSize: "1rem",
-                    color: bike.status === "AVAILABLE" ? "green" : "red",
-                  }}
-                >
-                  {bike.status === "AVAILABLE" && _string.LABELS.available}
-                  {bike.status === "RENTED" && _string.LABELS.rented}
-                  {bike.status === "OUT-OF-USE" &&
-                    _string.LABELS.out_of_service}
-                </span>
-                {bike.status === "AVAILABLE" ? (
-                  <global.Button
-                    onClick={() => {
-                      rentBike(bike._id);
+          {bikeList &&
+            bikeList.map((bike, index) => (
+              <Marker
+                key={index}
+                position={{ lat: bike.lat, lng: bike.lng }}
+                icon={divIcon({
+                  html:
+                    bike.status === "AVAILABLE"
+                      ? `<img src=${onMapMarker} class="leaflet-marker-img" />`
+                      : `<img src=${offMapMarker} class="leaflet-marker-img" />`,
+                })}
+              >
+                <Popup>
+                  <span
+                    style={{
+                      marginBottom: "10px",
+                      fontSize: "1rem",
+                      color: bike.status === "AVAILABLE" ? "green" : "red",
                     }}
                   >
-                    {_string.ACTIONS.rent}
-                  </global.Button>
-                ) : (
-                  <global.Button
-                    extraClass="btn-danger"
-                    onClick={() => {
-                      returnBike(bike._id);
-                    }}
-                  >
-                    {_string.ACTIONS.return}
-                  </global.Button>
-                )}
-              </Popup>
-            </Marker>
-          ))}
-      </MapContainer>
+                    {bike.status === "AVAILABLE" && _string.LABELS.available}
+                    {bike.status === "RENTED" && _string.LABELS.rented}
+                    {bike.status === "OUT-OF-USE" &&
+                      _string.LABELS.out_of_service}
+                  </span>
+                  {bike.status === "AVAILABLE" ? (
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        rentBike(bike._id);
+                      }}
+                    >
+                      {_string.ACTIONS.rent}
+                    </Button>
+                  ) : (
+                    <Button
+                      type="ghost"
+                      danger={true}
+                      onClick={() => {
+                        returnBike(bike._id);
+                      }}
+                    >
+                      {_string.ACTIONS.return}
+                    </Button>
+                  )}
+                </Popup>
+              </Marker>
+            ))}
+        </MapContainer>
+      </>
     </GeneralLayout>
   );
 }

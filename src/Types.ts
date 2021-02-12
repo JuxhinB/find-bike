@@ -7,3 +7,9 @@ export interface BikeType {
   "lng": number,
   "__v": number,
 }
+
+export interface UserInfoType {
+  "_id": string,
+  "name": string,
+  "password": string,
+}

@@ -19,7 +19,6 @@ export const BikeController = {
       if (err) response.send(err);
       return response.json(bikes);
     });
-    // message: `Hello ${request.query.name}`,
   },
   rent: (request, response, next) => {
     BikeModel.findByIdAndUpdate(
