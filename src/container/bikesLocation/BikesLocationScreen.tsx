@@ -30,7 +30,7 @@ function BikesLocationScreen() {
         <MapContainer
           className="flex-grow"
           center={initialPosition}
-          zoom={11}
+          zoom={10}
           scrollWheelZoom={false}
         >
           <TileLayer

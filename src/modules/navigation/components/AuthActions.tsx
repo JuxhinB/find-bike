@@ -14,7 +14,7 @@ function AuthActions(): JSX.Element {
           shape="round"
           icon={<UserOutlined />}
           size="large"
-          style={{ marginBottom: "1rem" }}
+          style={{ marginBottom: "1rem", textTransform: "capitalize" }}
           onClick={() => {}}
         >
           {userInfo.name}
@@ -26,7 +26,6 @@ function AuthActions(): JSX.Element {
         danger={true}
         icon={<UnlockOutlined />}
         size="large"
-        style={{ marginBottom: "1rem" }}
         onClick={() => {
           logout();
         }}
