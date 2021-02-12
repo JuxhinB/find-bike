@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import _string from "../../config/localization/_string";
 import { UserContext } from "../../provider/UserProvider";
 import comp from "./components";
-import {} from "antd";
+import logo from "../../assets/svg/app-logo.svg";
 
 function Navigation(): JSX.Element {
   const { userInfo } = useContext(UserContext);
@@ -19,19 +19,16 @@ function Navigation(): JSX.Element {
       >
         <p
           style={{
-            padding: "1rem 2.6rem",
+            padding: "0.4rem 2.6rem",
             backgroundColor: "white",
-            boxShadow: "5px 4px 18px #00000052",
+            boxShadow: "5px 4px 13px #00000052",
             borderBottomLeftRadius: 8,
             borderBottomRightRadius: 8,
             fontSize: "1.4rem",
             fontWeight: "bold",
           }}
         >
-          <span style={{ marginRight: "0.4rem", color: "#026e99" }}>
-            {_string.STRINGS.find}
-          </span>
-          <span style={{}}>{_string.STRINGS.bike}</span>
+          <img style={{ maxWidth: 130 }} src={logo} />
         </p>
       </div>
       <div
