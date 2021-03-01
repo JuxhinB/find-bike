@@ -1,37 +1,80 @@
-## Welcome to GitHub Pages
+# Available Commands
 
-You can use the [editor on GitHub](https://github.com/JuxhinB/find-bike/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+For the frontend this project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+###### Learn More
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Markdown
+### Available Front-End Commands
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+#### `client:build-start`
 
-```markdown
-Syntax highlighted code block
+Builds the styles only.
 
-# Header 1
-## Header 2
-### Header 3
+#### `client:start`
 
-- Bulleted
-- List
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-1. Numbered
-2. List
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-**Bold** and _Italic_ and `Code` text
+#### `client:test`
 
-[Link](url) and ![Image](src)
-```
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+#### `client:build`
 
-### Jekyll Themes
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/JuxhinB/find-bike/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-### Support or Contact
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+#### `client:eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+#### `client:format`
+
+Formats the src (front-end) directory only.
+
+### Available Back-End Commands
+
+#### `server:tsc`
+
+Transpile `typescript` in `javascript`.
+
+#### `server:tsc-watcht`
+
+Transpile `typescript` in `javascript` on file change. Watch mode.
+
+#### `server:deploy`
+
+Runs the server.
+
+#### `server:watch-deploy`
+
+Runs the server in Watch mode.
+
+#### `server:dev`
+
+Runs concurrently transpilation and server in Watch mode.
+
+#### `server:format`
+
+Formats the server (back-end) directory only.
+
+#### `build:prod`
+
+Prepares the whole application for production.
